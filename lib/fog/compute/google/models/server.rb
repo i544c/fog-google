@@ -509,8 +509,8 @@ module Fog
 
         def save(username: nil, public_key: nil)
           requires :name
-          requires :machine_type
-          requires :disks
+          #requires :machine_type
+          #requires :disks
           requires :zone
 
           generate_ssh_key_metadata(self.username, self.public_key) if self.public_key

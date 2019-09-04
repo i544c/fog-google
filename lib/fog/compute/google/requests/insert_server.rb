@@ -72,6 +72,12 @@ module Fog
           zone = zone.split("/")[-1]
 
           data = options.merge(:name => instance_name)
+
+          if options[:source_instance_template]
+            instance = ::Google::Apis::ComputeV1::Instance.new(data)
+            return @compute.insert_instance(@project, zone, instance, source_instance_template: options[:source_instance_template])
+          end
+
           data[:disks] = process_disks(options[:disks])
           data[:network_interfaces] = process_network_interfaces(options[:network_interfaces])
 
